@@ -6,14 +6,17 @@ import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-dotenv.config();
+dotenv.config({ path: './.env' });
 
-mongoose
-  .connect(process.env.MONGO)
+mongoose.connect(process.env.MONGO,{
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
   .then(() => {
     console.log('Connected to MongoDB!');
   })
   .catch((err) => {
+    console.log(process.env.MONGO);
     console.log(err);
   });
 
